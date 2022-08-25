@@ -1,6 +1,9 @@
 pipeline {
     agent any
-    tool name: 'Maven' type: 'maven'
+    tools {
+        maven 'Maven 3.8.6' 
+        jdk 'jdk11'
+    }
     stages {
         stage('Git CheckOut') {
             steps {
