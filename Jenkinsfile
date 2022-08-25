@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    tools {
+        maven "Maven"
+        jdk "jdk"
     stages {
         stage('Git CheckOut') {
             steps {
@@ -12,6 +14,12 @@ pipeline {
             steps {
                 echo 'Reading pom.xml file from workspace'
                 readFile 'pom.xml'
+            }
+        }
+        stage('Build'){
+            steps {
+                echo 'Building code'
+                sh mvn clean install
             }
         }
     }
