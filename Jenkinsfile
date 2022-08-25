@@ -13,8 +13,6 @@ pipeline {
                 ''' 
             }
         }
-    }
-    stages {
         stage('Git CheckOut') {
             steps {
                 echo 'Checking out code from git repository.'
