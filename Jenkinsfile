@@ -8,5 +8,11 @@ pipeline {
                 git 'https://github.com/MyGitBucket/Kbm.git'
             }
         }
+        stage('Read pom file'){
+            steps {
+                echo 'Reading pom.xml file from workspace'
+                readFile '/pom.xml'
+            }
+        }
     }
 }
