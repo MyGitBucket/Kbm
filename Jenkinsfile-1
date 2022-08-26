@@ -1,7 +1,4 @@
 pipeline {
-agent { 
-                    dockerfile true
-                    }
     tools {
         maven 'MAVEN'
         jdk 'JDK'
@@ -31,6 +28,11 @@ agent {
             steps {
                 echo 'Building code'
                 sh "mvn package"
+            }
+        }
+        stage('Build docker image') {
+          steps {
+                sh 'docker build -t Dockerfile .'
             }
         }
     }
