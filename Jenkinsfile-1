@@ -1,4 +1,7 @@
 pipeline {
+agent { 
+                    dockerfile true
+                    }
     tools {
         maven 'MAVEN'
         jdk 'JDK'
@@ -30,12 +33,5 @@ pipeline {
                 sh "mvn package"
             }
         }
-        stage ('Docker Agent') {
-            steps {
-                agent { 
-                    dockerfile true
-                    }
-                }
-          }
     }
 }
