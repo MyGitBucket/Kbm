@@ -1,18 +1,9 @@
 pipeline {
     agent any
     tools {
-        maven 'MAVEN'
-        jdk 'JDK'
+        maven 'Maven'
+        jdk 'Jdk'
     }
-    stages {
-        stage ('Initialize') {
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
-            }
-        }
         stage('Git CheckOut') {
             steps {
                 echo 'Checking out code from git repository.'
@@ -28,7 +19,7 @@ pipeline {
         stage('Build'){
             steps {
                 echo 'Building code'
-                sh "mvn package"
+                sh "mvn clean package"
             }
         }
     }
