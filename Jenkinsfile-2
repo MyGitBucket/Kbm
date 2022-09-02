@@ -21,7 +21,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    docker build -t jenkins-pipeline:${env.BUILD_ID} .
+                    sh "docker build -t jenkins-pipeline:${env.BUILD_ID} ."
                     }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
                                  variable: 'dockerhub')]) {
                         sh "docker login -u dockkunal -p ${dockerhub}"
                     }
-                    docker push dockkunal/jenkins-pipeline:${env.BUILD_ID}
+                    sh "docker push dockkunal/jenkins-pipeline:${env.BUILD_ID}"
                  }
                                  
             }
