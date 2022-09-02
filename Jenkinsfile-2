@@ -34,7 +34,7 @@ pipeline {
                                  variable: 'dockerhub')]) {
                         sh "docker login -u dockkunal -p ${dockerhub}"
                     }
-                    app.push("jenkins-pipeline:${env.BUILD_ID}")
+                    docker push dockkunal/jenkins-pipeline:${env.BUILD_ID}
                  }
                                  
             }
