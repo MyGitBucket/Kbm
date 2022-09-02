@@ -21,7 +21,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    app = docker.build("jenkins-pipeline:${env.BUILD_ID}")
+                    docker build -t jenkins-pipeline:${env.BUILD_ID} .
                     }
             }
         }
