@@ -8,9 +8,10 @@ pipeline {
     }
     
     stages {
-        stage('Checkout') {
+        stage('Build'){
             steps {
-                checkout scm
+                echo 'Building code'
+                sh "mvn clean package"
             }
         }
         stage('Build image') {
