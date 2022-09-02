@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    environment {
+        PROJECT_ID = 'extreme-torch-358604'
+                CLUSTER_NAME = 'jenkins'
+                LOCATION = 'us-west4-b'
+                CREDENTIALS_ID = 'kubernetes'
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build image') {
+            steps {
+                script {
+                    app = docker.build("jenkins-pipeline:${env.BUILD_ID}")
+                    }
+            }
+        }
+        
+        stage('Push image') {
+            steps {
+                script {
+                    withCredentials( \
+                                 [string(credentialsId: 'dockerhub',\
+                                 variable: 'dockerhub')]) {
+                        sh "docker login -u dockkunal -p ${dockerhub}"
+                    }
+                    app.push("${env.BUILD_ID}")
+                 }
+                                 
+            }
+        }  
+}
