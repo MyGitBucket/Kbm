@@ -6,6 +6,10 @@ pipeline {
                 LOCATION = 'us-west4-b'
                 CREDENTIALS_ID = 'kubernetes'
     }
+    tools {
+        maven 'Maven'
+        jdk 'Jdk'
+    }
     
     stages {
         stage('Build'){
