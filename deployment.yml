@@ -8,21 +8,24 @@ spec:
   strategy:
     type: Recreate
   selector:
-    matchlabels:
+    matchLabels:
       app: service
-   template:
+      
+  template:
     metadata:
       labels:
         app: service
         tier: service
-    sec:
+    spec:
       containers:
-      - name: service
-        image: dockkunal/jenkins-pipeline:${env.BUILD_ID}
-        imagePullPolicy: always
-        ports:
-        - continer Port: 80
-          name: service
+        - name: service
+          image: dockkunal/jenkins-pipeline:latest
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 5000
+            name: service
+
+
 ---
 apiVersion: v1
 kind: Service
@@ -32,9 +35,9 @@ metadata:
     app: service
 spec:
   ports:
-    - port: 81
-      targetport:81
-    selector: 
-      app: service
-      tier: service
-    type: service
+    - port: 5000
+      targetPort: 5000
+  selector:
+    app: service
+    tier: service
+  type: LoadBalancer
