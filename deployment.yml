@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: deployment
+kind: Deployment
 metadata:
   name: service
   labels:
@@ -22,7 +22,7 @@ spec:
           image: dockkunal/jenkins-pipeline:latest
           imagePullPolicy: Always
           ports:
-          - containerPort: 5000
+          - containerPort: 8081
             name: service
 
 
@@ -35,8 +35,8 @@ metadata:
     app: service
 spec:
   ports:
-    - port: 5000
-      targetPort: 5000
+    - port: 8081
+      targetPort: 8081
   selector:
     app: service
     tier: service
