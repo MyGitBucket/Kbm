@@ -1,1 +1,39 @@
-
+pipeline {
+    agent any
+    environment {
+        PROJECT_ID = 'extreme-torch-358604'
+                CLUSTER_NAME = 'jenkins'
+                LOCATION = 'us-west4-b'
+                CREDENTIALS_ID = 'kubernetes'
+    }
+    stages {
+    stage('Verify version') {
+      steps {
+        sh '''
+          gcloud version
+        '''
+      }
+    }
+    stage('Authenticate') {
+      steps {
+        sh '''
+          gcloud auth activate-service-account --key-file="$CREDENTIALS_ID"
+        '''
+      }
+    }
+    stage('Install service') {
+      steps {
+        sh '''
+          gcloud run services replace service.yaml --platform='managed' --region="$LOCATION"
+        '''
+      }
+    }
+    stage('Allow allUsers') {
+      steps {
+        sh '''
+          gcloud run services add-iam-policy-binding hello --region="$LOCATION" --member='allUsers' --role='roles/run.invoker'
+        '''
+      }
+    }
+  }
+}
