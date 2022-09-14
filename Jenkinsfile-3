@@ -17,21 +17,21 @@ pipeline {
     stage('Authenticate') {
       steps {
         sh '''
-          gcloud auth activate-service-account --key-file="$CREDENTIALS_ID"
+      gcloud auth activate-service-account --key-file="${env.CREDENTIALS_ID}"
         '''
       }
     }
     stage('Install service') {
       steps {
         sh '''
-          gcloud run services replace service.yaml --platform='managed' --region="$LOCATION"
+          gcloud run services replace service.yaml --platform='managed' --region="${env.LOCATION}"
         '''
       }
     }
     stage('Allow allUsers') {
       steps {
         sh '''
-          gcloud run services add-iam-policy-binding hello --region="$LOCATION" --member='allUsers' --role='roles/run.invoker'
+          gcloud run services add-iam-policy-binding hello --region="${env.LOCATION}" --member='allUsers' --role='roles/run.invoker'
         '''
       }
     }
