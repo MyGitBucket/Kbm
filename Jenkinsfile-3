@@ -4,7 +4,7 @@ pipeline {
         PROJECT_ID = 'extreme-torch-358604'
                 CLUSTER_NAME = 'jenkins'
                 LOCATION = 'us-west4-b'
-                CREDENTIALS_ID = credentials('kubernetes')
+                CREDENTIALS_ID=credentials('kubernetes')
     }
     stages {
     stage('Verify version') {
