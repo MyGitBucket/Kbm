@@ -36,10 +36,10 @@ metadata:
   namespaces: default
 spec:
   ports:
-  -nodePort: 32208
-   port: 8081
-   protocol: TCP
-   targetPort: 8081
+  - nodePort: 32208
+    port: 8081
+    protocol: TCP
+    targetPort: 8081
   selector:
     app:
   sessionAffinity: None
