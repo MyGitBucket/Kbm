@@ -1,4 +1,4 @@
-apiVersion: serving.knative.dev/v1
+apiVersion: order-service/v1
 kind: Deployment
 metadata:
   labels:
@@ -27,8 +27,8 @@ spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
 ---
-apiVersion: serving.knative.dev/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
   labels:
     app: order-service
