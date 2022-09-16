@@ -4,7 +4,7 @@ metadata:
   labels:
     app: order-service
   name: order-service
-  namespaces: default
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -33,7 +33,7 @@ metadata:
   labels:
     app: order-service
   name: order-service
-  namespaces: default
+  namespace: default
 spec:
   ports:
   - nodePort: 32208
