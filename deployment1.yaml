@@ -1,0 +1,46 @@
+apiVersion: serving.knative.dev/v1
+kind: Deployment
+metadata:
+  labels:
+    app: order-service
+  name: order-service
+  namespaces: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      lables:
+      app: order-service
+    spec:
+      containers:
+      - image: dockkunal/jenkins-pipeline:latest
+        imagePullPolicy: True
+        name: orderservice
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: serving.knative.dev/v1
+kind: Deployment
+metadata:
+  labels:
+    app: order-service
+  name: order-service
+  namespaces: default
+spec:
+  ports:
+  -nodePort: 32208
+   port: 8081
+   protocol: TCP
+   targetPort: 8081
+  selector:
+    app:
+  sessionAffinity: None
+  type: LoadBalancer
