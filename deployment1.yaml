@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - image: dockkunal/jenkins-pipeline:latest
-        imagePullPolicy: True
+        imagePullPolicy: Always
         name: orderservice
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
